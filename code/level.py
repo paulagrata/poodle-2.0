@@ -32,7 +32,7 @@ class Level:
 
         # sky
         self.rain = Rain(self.all_sprites)
-        self.raining = randint(0,10) > 3 #true: on, false: off
+        self.raining = randint(0,10) > 7 #true: on, false: off
         self.soil_layer.raining = self.raining
         self.sky = Sky()
 
@@ -41,13 +41,13 @@ class Level:
         self.shop_active = False
 
         # music
-        self.success = pygame.mixer.Sound('../audio/success.wav')
+        self.success = pygame.mixer.Sound('audio/success.wav')
         self.success.set_volume(0.1)
-        self.music = pygame.mixer.Sound('../audio/music.mp3')
-        self.music.play(loops = -1).set_volume(0.1)
+        self.music = pygame.mixer.Sound('audio/music.mp3')
+        self.music.play(loops = -1).set_volume(0.01)
         
     def setup(self, all_sprites):
-        tmx_data = load_pygame('../data/map.tmx')
+        tmx_data = load_pygame('data/map.tmx')
 
         # house
         for layer in ['HouseFloor', 'HouseFurnitureBottom']:
@@ -63,7 +63,7 @@ class Level:
             Generic((x * TILE_SIZE, y * TILE_SIZE), surf, [self.all_sprites, self.collision_sprites])
         
         # water 
-        water_frames = import_folder('../graphics/water')
+        water_frames = import_folder('graphics/water')
         for x, y, surf in tmx_data.get_layer_by_name('Water').tiles():
             Water((x * TILE_SIZE, y * TILE_SIZE), water_frames, self.all_sprites)
 
@@ -115,7 +115,7 @@ class Level:
 
         Generic(
             pos = (0,0), 
-            surf = pygame.image.load('../graphics/world/ground.png').convert_alpha(), 
+            surf = pygame.image.load('graphics/world/ground.png').convert_alpha(), 
             groups = self.all_sprites,
             z = LAYERS['ground']
             )
@@ -175,7 +175,9 @@ class Level:
         # updates
         if self.shop_active:
             self.menu.update()
+            self.sky.pause()
         else:
+            self.sky.resume()
             self.all_sprites.update(dt, self.all_sprites)
             self.plant_collision()
         

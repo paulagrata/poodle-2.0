@@ -51,15 +51,15 @@ class Player(pygame.sprite.Sprite):
         # player inventory
         # items
         self.item_inventory = {
-            'wood':   20,
-            'apple':  20,
-            'corn':   20,
-            'tomato': 20
+            'wood':   0,
+            'apple':  0,
+            'corn':   0,
+            'tomato': 0
         }
         # seeds
         self.seed_inventory = {
-            'corn':   5,
-            'tomato': 5
+            'corn':   0,
+            'tomato': 0
         }
         # money
         self.money = 200
@@ -72,7 +72,7 @@ class Player(pygame.sprite.Sprite):
         self.toggle_shop = toggle_shop
 
         # sounds
-        self.watering = pygame.mixer.Sound('../audio/water.mp3')
+        self.watering = pygame.mixer.Sound('audio/water.mp3')
         self.watering.set_volume(0.1)
         
     def use_tool(self):
@@ -108,14 +108,16 @@ class Player(pygame.sprite.Sprite):
         }
 
         for animation in self.animations.keys():
-            full_path = '../graphics/character/' + animation
+            full_path = 'graphics/character/' + animation
             self.animations[animation] = import_folder(full_path)
         #print(self.animations)
 
     def animate(self,dt):
-        self.frame_index += 4 * dt
-        if self.frame_index >= len(self.animations[self.status]):
-            self.frame_index = 0 #returns back to 0 to loop animation
+        #self.frame_index += 4 * dt
+        #if self.frame_index >= len(self.animations[self.status]):
+            #self.frame_index = 0 #returns back to 0 to loop animation
+
+        self.frame_index = (self.frame_index+dt*4) % len(self.animations[self.status])
 
         self.image = self.animations[self.status][int(self.frame_index)]
 

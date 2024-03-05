@@ -11,15 +11,29 @@ class Sky():
         self.full_surf = pygame.Surface((SCREEN_WIDTH, SCREEN_HEIGHT))
         self.start_color = [255,255,255]
         self.end_color = [38,101,189]
+        self.paused_color = None
+        self.paused = False
         
 
     def display(self, dt):
-        for index, value in enumerate(self.end_color):
-            if self.start_color[index] > value:
-                self.start_color[index] -= 2 * dt
-                
-        self.full_surf.fill(self.start_color)
-        self.display_surface.blit(self.full_surf, (0,0), special_flags=pygame.BLEND_RGB_MULT)
+        if not self.paused:
+            for index, value in enumerate(self.end_color):
+                if self.start_color[index] > value:
+                    self.start_color[index] -= 2 * dt
+                    
+            self.full_surf.fill(self.start_color)
+            self.display_surface.blit(self.full_surf, (0,0), special_flags=pygame.BLEND_RGB_MULT)
+        else: 
+            if self.paused_color:
+                self.full_surf.fill(self.paused_color)
+                self.display_surface.blit(self.full_surf, (0, 0), special_flags=pygame.BLEND_RGB_MULT)
+
+    def pause(self):
+        self.paused = True
+        self.paused_color = self.start_color.copy()
+
+    def resume(self):
+        self.paused = False
 
 class Drop(Generic):
     def __init__(self, surf, pos, moving, groups, z):
@@ -50,9 +64,9 @@ class Drop(Generic):
 class Rain:
     def __init__(self, all_sprites):
         self.all_sprites = all_sprites
-        self.rain_drops = import_folder('../graphics/rain/drops/')
-        self.rain_floor = import_folder('../graphics/rain/floor/')
-        self.floor_w, self.floor_h = pygame.image.load('../graphics/world/ground.png').get_size()
+        self.rain_drops = import_folder('graphics/rain/drops/')
+        self.rain_floor = import_folder('graphics/rain/floor/')
+        self.floor_w, self.floor_h = pygame.image.load('graphics/world/ground.png').get_size()
 
     def create_floor(self):
         Drop(
