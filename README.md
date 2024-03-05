@@ -4,12 +4,6 @@
 ## description:
 a Stardew Valley-inspired RPG, featuring farming, foraging, day-night cycles, weather effects, and a merchant system. Utilizing Tiled for expandability, the game encompasses intricate mechanics such as player movement, tool usage, plant seeding, harvesting, and inventory management. With detailed graphics, dynamic animations, and interactive elements including collisions and particle effects, players embark on a journey filled with challenges, exploration, and commerce. 
 
-## future updates:
-- UI
-- map
-- NPCs
-- enemies
-
 ## need: 
 - pygame
 - pytmx
@@ -27,6 +21,12 @@ a Stardew Valley-inspired RPG, featuring farming, foraging, day-night cycles, we
 - shop displays buy items as seeds
 - shop displays item price and inventory amount
 - shop pauses sky transition
+
+## future updates:
+- UI
+- map
+- NPCs
+- enemies
 
 [[asset pack](https://cupnooble.itch.io/)]
 
