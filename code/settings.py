@@ -14,7 +14,8 @@ APPLE_POS = {
 # overlay positions
 OVERLAY_POSITIONS = {
     'tool': (40, SCREEN_HEIGHT - 15),
-    'seed': (70, SCREEN_HEIGHT - 5)
+    'seed': (85, SCREEN_HEIGHT - 5),
+    'clock': (750, SCREEN_HEIGHT - 5)   #760
 }
 
 # tool hit boxes

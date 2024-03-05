@@ -176,8 +176,10 @@ class Level:
         if self.shop_active:
             self.menu.update()
             self.sky.pause()
+            self.overlay.pause()
         else:
             self.sky.resume()
+            self.overlay.resume()
             self.all_sprites.update(dt, self.all_sprites)
             self.plant_collision()
         

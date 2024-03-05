@@ -19,9 +19,10 @@ class Game:
                     pygame.quit()
                     sys.exit()
                     
-            dt = self.clock.tick() / 1000
+            dt = self.clock.tick(300) / 1000        #fps, 300ish
             importlib.reload(settings)
             self.level.run(dt)
+            pygame.mouse.set_visible(False)
             pygame.display.update()
 
 if __name__ == '__main__':
