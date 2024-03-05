@@ -27,6 +27,8 @@ a Stardew Valley-inspired RPG, featuring farming, foraging, day-night cycles, we
 - map
 - NPCs
 - enemies
+- save/load game
+- clock/time
 
 [[asset pack](https://cupnooble.itch.io/)]
 
