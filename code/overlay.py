@@ -1,5 +1,6 @@
 import pygame
 from settings import *
+from timers import Timer 
 
 class Overlay:
     def __init__(self, player):
@@ -7,11 +8,6 @@ class Overlay:
         #general setup
         self.display_surface = pygame.display.get_surface()
         self.player = player
-
-        # pause
-        self.paused = False
-        self.pause_start_time = 0
-        self.start_time = pygame.time.get_ticks()
 
         #imports [key value pairs, not same as tools/seeds used]
         overlay_path = 'graphics/overlay/'
@@ -22,6 +18,12 @@ class Overlay:
 
         #font
         self.font = pygame.font.Font('font/LycheeSoda.ttf', 30)
+
+        # time
+        self.active = True
+        self.time_elapsed = 0
+        self.clock = pygame.time.Clock()
+
 
 
     def display(self):
@@ -36,27 +38,46 @@ class Overlay:
         seed_rect = seed_surf.get_rect(midbottom = OVERLAY_POSITIONS['seed'])
         self.display_surface.blit(seed_surf,seed_rect)
 
+        # time 
+        time_str = self.time()
+        text_surface = self.font.render(str(time_str), True, (255, 255, 255))  # Render the time as text
+        time_rect = text_surface.get_rect(midbottom=OVERLAY_POSITIONS['clock'])
+        self.display_surface.blit(text_surface, time_rect)
 
-        if not self.paused:
-            current_time = pygame.time.get_ticks()
-            elapsed_time = (current_time - self.pause_start_time) * 500
 
-            minutes = (elapsed_time // (1000 * 60)) % 60
-            hours = 10 + (elapsed_time // (1000 * 60 * 60)) % 24
+    def time(self):
+        self.clock.tick() # fps:30
 
-            if hours == 0: time_str = f"12:{minutes:02} AM"  # [midnight] f"Time: 12:{minutes:02} AM" 
-            elif hours < 12: time_str = f"{hours:02}:{minutes:02} AM"  #f"Time: {hours:02}:{minutes:02} AM"
-            elif hours == 12: time_str = f"12:{minutes:02} PM"  # [noon]
-            else: time_str = f"{hours-12:02}:{minutes:02} PM"
+        if self.active:
+            self.time_elapsed += 1000 * self.clock.get_time()
 
-            text_surface = self.font.render(time_str, True, (255, 255, 255))  # Render the time as text
-            time_rect = text_surface.get_rect(midbottom=OVERLAY_POSITIONS['clock'])
-            self.display_surface.blit(text_surface, time_rect)
+        seconds = self.time_elapsed // 1000
+        minutes, seconds = divmod(seconds, 60)
+        hours, minutes = divmod(minutes, 60) 
+        hours += 10 # 10am
+
+
+        
+        hours = hours % 24  # Add the elapsed hours and keep within 24 hours
+        
+        am_pm = "AM" if hours < 12 else "PM"
+        display_hours = hours % 12 if hours % 12 != 0 else 12
+
+        if hours == 0:
+            am_pm = 'AM'
+        elif hours >= 12:
+            am_pm = 'PM'
+
+
+        time_str = "{:2d} {}".format(display_hours, am_pm)
+        return time_str
+        
 
 
     def pause(self):
-        self.paused = True
+        #print("Paused the clock")
+        self.active = False
 
 
     def resume(self):
-        self.paused = False
+        self.active = True

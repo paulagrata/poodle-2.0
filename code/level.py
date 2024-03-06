@@ -167,19 +167,22 @@ class Level:
 
     def run(self,dt):
 
+
+
         # drawing logic
         self.display_surface.fill('pink')
         #self.all_sprites.draw(self.display_surface)
         self.all_sprites.custom_draw(self.player)
 
+
         # updates
         if self.shop_active:
+            self.overlay.pause()
             self.menu.update()
             self.sky.pause()
-            self.overlay.pause()
         else:
-            self.sky.resume()
             self.overlay.resume()
+            self.sky.resume()
             self.all_sprites.update(dt, self.all_sprites)
             self.plant_collision()
         
