@@ -21,6 +21,8 @@ a Stardew Valley-inspired RPG, featuring farming, foraging, day-night cycles, we
 - shop displays buy items as seeds
 - shop displays item price and inventory amount
 - shop pauses sky transition
+- clock backend + frontend [needs updating]
+- clock will pause when using shop
 
 ## future updates:
 - UI
