@@ -2,6 +2,7 @@ import pygame
 from settings import *
 from player import Player
 from overlay import Overlay
+from clock import Clock
 from sprites import Generic, Water, WildFlower, Tree, Interaction, Particle
 from pytmx.util_pygame import load_pygame
 from support import *
@@ -28,6 +29,7 @@ class Level:
         
         self.setup(all_sprites=self.all_sprites)
         self.overlay = Overlay(self.player)
+        self.clock = Clock()
         self.transition = Transition(self.reset,self.player)
 
         # sky
@@ -177,10 +179,12 @@ class Level:
 
         # updates
         if self.shop_active:
+            self.clock.pause()
             self.overlay.pause()
             self.menu.update()
             self.sky.pause()
         else:
+            self.clock.resume()
             self.overlay.resume()
             self.sky.resume()
             self.all_sprites.update(dt, self.all_sprites)
@@ -188,6 +192,7 @@ class Level:
         
         # weather 
         self.overlay.display()
+        self.clock.display()
         if self.raining and not self.shop_active:   # rain
             self.rain.update(dt, self.all_sprites)
         self.sky.display(dt)                        # daytime 
