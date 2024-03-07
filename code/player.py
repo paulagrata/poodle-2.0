@@ -58,8 +58,8 @@ class Player(pygame.sprite.Sprite):
         }
         # seeds
         self.seed_inventory = {
-            'corn':   0,
-            'tomato': 0
+            'corn':   2,
+            'tomato': 2
         }
         # money
         self.money = 200
@@ -95,8 +95,11 @@ class Player(pygame.sprite.Sprite):
 
     def use_seed(self):
         if self.seed_inventory[self.selected_seed] > 0:
-            self.soil_layer.plant_seed(self.target_pos, self.selected_seed)
-            self.seed_inventory[self.selected_seed] - 1
+            if self.soil_layer.plant_seed(self.target_pos, self.selected_seed):
+                self.seed_inventory[self.selected_seed] -= 1
+            else:
+                print("plant not planted.")
+            print(self.seed_inventory)
 
     def import_assets(self):
         self.animations = {
