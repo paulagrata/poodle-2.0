@@ -19,9 +19,6 @@ class Overlay:
         #font
         self.font = pygame.font.Font('font/LycheeSoda.ttf', 30)
 
-
-
-
     def display(self):
 
         #tool
@@ -34,14 +31,8 @@ class Overlay:
         seed_rect = seed_surf.get_rect(midbottom = OVERLAY_POSITIONS['seed'])
         self.display_surface.blit(seed_surf,seed_rect)
 
-
-        
-
-
     def pause(self):
-
         self.active = False
-
-
+        
     def resume(self):
         self.active = True

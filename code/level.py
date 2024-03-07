@@ -174,7 +174,6 @@ class Level:
         self.clock.time_elapsed = 0
         self.clock.get_time = 0
 
-
     def run(self,dt):
 
         # drawing logic
