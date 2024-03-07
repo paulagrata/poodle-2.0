@@ -3,7 +3,7 @@ from settings import *
 from timers import Timer 
 
 class Clock:
-    def __init__(self):
+    def __init__(self) :
 
         #general setup
         self.display_surface = pygame.display.get_surface()
@@ -38,9 +38,12 @@ class Clock:
         hours, minutes = divmod(minutes, 60) 
         hours += 10 # 10am
 
+        # stops at 2am
+        if hours >= 26:
+            self.pause()
+            return "2 AM"
 
-        
-        hours = hours % 24  # Add the elapsed hours and keep within 24 hours
+        hours = hours % 24 
         
         am_pm = "AM" if hours < 12 else "PM"
         display_hours = hours % 12 if hours % 12 != 0 else 12
@@ -50,16 +53,11 @@ class Clock:
         elif hours >= 12:
             am_pm = 'PM'
 
-
         time_str = "{:2d} {}".format(display_hours, am_pm)
         return time_str
         
-
-
     def pause(self):
-        #print("Paused the clock")
         self.active = False
-
 
     def resume(self):
         self.active = True

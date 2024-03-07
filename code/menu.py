@@ -74,7 +74,7 @@ class Menu:
                 self.index += 1
                 self.timer.activate()
 
-            if keys[pygame.K_RETURN] or keys[pygame.K_SPACE]:
+            if keys[pygame.K_SPACE]:
                 self.timer.activate()
 
                 # get item
@@ -144,6 +144,7 @@ class Menu:
     def update(self):
         self.input()
         self.display_money()
+        
 
         #pygame.draw.rect(self.display_surface,'pink',self.main_rect)
         #self.display_surface.blit(pygame.Surface((500,500)),(0,0)) # black rect
