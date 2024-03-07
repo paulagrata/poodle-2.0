@@ -38,10 +38,10 @@ class Clock:
         hours, minutes = divmod(minutes, 60) 
         hours += 10 # 10am
 
-        # stops at 2am
-        if hours >= 26:
+        # stops at 3am
+        if hours >= 27:
             self.pause()
-            return "2 AM"
+            return "3 AM"
 
         hours = hours % 24 
         
