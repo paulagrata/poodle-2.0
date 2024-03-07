@@ -23,6 +23,7 @@ a Stardew Valley-inspired RPG, featuring farming, foraging, day-night cycles, we
 - shop pauses sky transition
 - clock backend + frontend [needs updating]
 - clock will pause when using shop
+- clock starts at 10am + stops at 3am, resets upon sleeping
 
 ## future updates:
 - UI
