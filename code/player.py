@@ -2,6 +2,7 @@ import pygame
 from settings import *
 from support import *
 from timers import Timer
+from stats import StatUpdater
 
 # pos - position
 
@@ -66,10 +67,10 @@ class Player(pygame.sprite.Sprite):
 
         # stats
         self.stats = {'health': 100, 'energy': 100, 'speed': 500}
-        self.health = self.stats ['health'] * 0.5
-        self.energy = self.stats ['energy'] * 0.8
-        self.exp = 123
+        self.health = self.stats ['health'] 
+        self.energy = self.stats ['energy']
         self.speed = self.stats ['speed']
+        self.stat_updater = StatUpdater(self)
 
         # interaction
         self.tree_sprites = tree_sprites
@@ -256,6 +257,12 @@ class Player(pygame.sprite.Sprite):
         self.get_status()
         self.update_timers()
         self.get_target_pos()
+        self.stat_updater.update()
 
         self.move(dt)
         self.animate(dt)
+
+
+
+        #debug
+        #print(f"Health: {self.health}, Energy: {self.energy}")

@@ -33,7 +33,7 @@ class Overlay:
 
         #inventory amount
         amount = self.player.seed_inventory[self.player.selected_seed]
-        print(amount) 
+        #print(amount) 
         #print(self.player.selected_seed)
         amount_surf = self.font.render(f'{amount}', False, 'White')
         amount_rect = amount_surf.get_rect(midbottom = OVERLAY_POSITIONS['seedinventory'])
