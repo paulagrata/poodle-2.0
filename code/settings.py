@@ -15,6 +15,7 @@ APPLE_POS = {
 OVERLAY_POSITIONS = {
     'tool': (40, SCREEN_HEIGHT - 15),
     'seed': (85, SCREEN_HEIGHT - 5),
+    'seedinventory': (115, SCREEN_HEIGHT - 5),
     'clock': (750, SCREEN_HEIGHT - 5)   #760
 }
 
@@ -60,3 +61,20 @@ PURCHASE_PRICES = {
     'corn': 4,
     'tomato': 5,
 }
+
+
+# UI
+BAR_HEIGHT = 20
+HEALTH_BAR_WIDTH = 200
+ENERGY_BAR_WIDTH = 140
+ITEM_BOX_SIZE = 80
+UI_FONT = 'font/LycheeSoda.ttf'
+UI_FONT_SIZE = 18
+
+# gennie colors
+UI_BG_COLOR = '#222222'
+UI_BORDER_COLOR = '#111111'
+TEXT_COLOR = '#EEEEEE'
+HEALTH_COLOR = '#F4B9B8'
+ENERGY_COLOR = '#41729F'
+UI_BORDER_COLOR_ACTIVE = 'gold'
