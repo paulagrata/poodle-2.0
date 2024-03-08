@@ -11,6 +11,7 @@ from soil import SoilLayer
 from sky import Rain, Sky
 from random import randint
 from menu import Menu
+from ui import UI
 
 
 class Level:
@@ -37,6 +38,9 @@ class Level:
         self.raining = randint(0,10) > 7 #true: on, false: off
         self.soil_layer.raining = self.raining
         self.sky = Sky()
+
+        # ui
+        self.ui = UI()
 
         # shop
         self.menu = Menu(self.player, self.toggle_shop)
@@ -181,6 +185,10 @@ class Level:
         #self.all_sprites.draw(self.display_surface)
         self.all_sprites.custom_draw(self.player)
 
+        #UI
+        self.overlay.display()
+        self.ui.display(self.player)
+
         # updates
         if self.shop_active:
             self.clock.pause()
@@ -195,7 +203,6 @@ class Level:
             self.plant_collision()
         
         # weather 
-        self.overlay.display()
         if self.raining and not self.shop_active:   # rain
             self.rain.update(dt, self.all_sprites)
         self.sky.display(dt)                        # daytime 
@@ -209,6 +216,7 @@ class Level:
 
         # testing [debug]:
         #print(self.player.item_inventory)      # prints player's inventory
+        #print(self.player.seed_inventory)      # prints player's seed inventory
         #print(self.shop_active)                 # prints if shop is active
 
 class CameraGroup(pygame.sprite.Group):
