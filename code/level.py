@@ -12,6 +12,7 @@ from sky import Rain, Sky
 from random import randint
 from menu import Menu
 from ui import UI
+from stats import StatUpdater
 
 
 class Level:
@@ -41,6 +42,7 @@ class Level:
 
         # ui
         self.ui = UI()
+        self.stats = StatUpdater(self.player)
 
         # shop
         self.menu = Menu(self.player, self.toggle_shop)
@@ -178,6 +180,23 @@ class Level:
         self.clock.time_elapsed = 0
         self.clock.get_time = 0
 
+        self.stats.reset()
+
+    def pause(self):
+        self.clock.pause()
+        self.overlay.pause()
+        self.sky.pause()
+        self.stats.pause()
+        self.overlay.pause()
+
+    def resume(self):
+        self.clock.resume()
+        self.overlay.resume()
+        self.sky.resume()
+        self.stats.resume()
+        self.overlay.resume()
+
+
     def run(self,dt):
 
         # drawing logic
@@ -191,14 +210,10 @@ class Level:
 
         # updates
         if self.shop_active:
-            self.clock.pause()
-            self.overlay.pause()
+            self.pause()
             self.menu.update()
-            self.sky.pause()
         else:
-            self.clock.resume()
-            self.overlay.resume()
-            self.sky.resume()
+            self.resume()
             self.all_sprites.update(dt, self.all_sprites)
             self.plant_collision()
         
