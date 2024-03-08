@@ -25,13 +25,15 @@ class Menu:
         self.index = 0
         self.timer = Timer(200)
 
+    """     
     def display_money(self):
         text_surf = self.font.render(f'${self.player.money}', False, 'Black')
         text_rect = text_surf.get_rect(midbottom = (SCREEN_WIDTH // 2, SCREEN_HEIGHT - 20))
 
         pygame.draw.rect(self.display_surface, 'White', text_rect.inflate(10,10),0,6) # 0,6 rounds it.
 
-        self.display_surface.blit(text_surf,text_rect)
+        self.display_surface.blit(text_surf,text_rect) 
+    """
 
     def setup(self):
 
@@ -143,7 +145,7 @@ class Menu:
     
     def update(self):
         self.input()
-        self.display_money()
+        #self.display_money()
         
 
         #pygame.draw.rect(self.display_surface,'pink',self.main_rect)

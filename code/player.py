@@ -23,7 +23,7 @@ class Player(pygame.sprite.Sprite):
         #movement attributes
         self.direction = pygame.math.Vector2()
         self.pos = pygame.math.Vector2(self.rect.center)
-        self.speed = 500  # normal: 200
+        #self.speed = 500  # normal: 200
 
         # collision
         self.hitbox = self.rect.copy().inflate((-126,-70)) # width, length
@@ -59,10 +59,17 @@ class Player(pygame.sprite.Sprite):
         # seeds
         self.seed_inventory = {
             'corn':   2,
-            'tomato': 2
+            'tomato': 0
         }
         # money
         self.money = 200
+
+        # stats
+        self.stats = {'health': 100, 'energy': 100, 'speed': 500}
+        self.health = self.stats ['health'] * 0.5
+        self.energy = self.stats ['energy'] * 0.8
+        self.exp = 123
+        self.speed = self.stats ['speed']
 
         # interaction
         self.tree_sprites = tree_sprites

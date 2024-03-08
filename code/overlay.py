@@ -31,6 +31,15 @@ class Overlay:
         seed_rect = seed_surf.get_rect(midbottom = OVERLAY_POSITIONS['seed'])
         self.display_surface.blit(seed_surf,seed_rect)
 
+        #inventory amount
+        amount = self.player.seed_inventory[self.player.selected_seed]
+        print(amount) 
+        #print(self.player.selected_seed)
+        amount_surf = self.font.render(f'{amount}', False, 'White')
+        amount_rect = amount_surf.get_rect(midbottom = OVERLAY_POSITIONS['seedinventory'])
+        #pygame.draw.rect(self.display_surface, (0, 0, 0), amount_rect.inflate(10, 10))
+        self.display_surface.blit(amount_surf,amount_rect)
+
     def pause(self):
         self.active = False
         
