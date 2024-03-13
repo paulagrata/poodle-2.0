@@ -27,6 +27,7 @@ tutorial version: [[github](https://github.com/paulagrata/poodle/)]
 - **F:** plant seed
 - **Q:** switches tools
 - **E:** switches seeds
+- **SHIFT:** turns you into forest gump
 - **ENTER:** (near bed) sleep
   
 [shop]
@@ -50,6 +51,7 @@ tutorial version: [[github](https://github.com/paulagrata/poodle/)]
 - health/energy backend + frontend
 - pause menu! successfully pauses the game. [still need needs paused]
 - need cheat! will reset needs to full amount
+- added running feature
 
  ## bugs
 - tree apples on empty trees displaying when day resets
