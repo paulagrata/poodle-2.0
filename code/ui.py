@@ -38,19 +38,28 @@ class UI:
         # drawing the bar
         pygame.draw.rect(self.display_surface,color,current_rect)
         pygame.draw.rect(self.display_surface, UI_BORDER_COLOR,bg_rect,3)
+
+    def reset(self,player):
+        #print(MOOD_COLORS['energy'])
+        self.show_bar(player.energy, player.stats['energy'], self.energy_bar_rect, MOOD_COLORS['energy'])
+        self.show_bar(player.health, player.stats['health'], self.health_bar_rect, MOOD_COLORS['health'])
+
         
     def display(self, player):
         #pygame.draw.rect(self.display_surface,'black',self.health_bar_rect)
 
-        # moods
+        # moods [ need to fix ]
         moods = ['health', 'energy']        
         for mood in moods:
-            if getattr(player, mood) <= 30:
+            # mood UI
+            #print(getattr(player, mood))
+            if getattr(player, mood) > 30:
+                pass
+                #print('greater than 30')
+            else:
                 MOOD_COLORS[mood] = 'Red'
+        self.reset(player)
 
-        # mood ui
-        self.show_bar(player.health, player.stats['health'], self.health_bar_rect, MOOD_COLORS['health'])
-        self.show_bar(player.energy, player.stats['energy'], self.energy_bar_rect, MOOD_COLORS['energy'])
 
         # money ui
         self.show_money(player)
