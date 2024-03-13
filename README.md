@@ -23,13 +23,14 @@ tutorial version: [[github](https://github.com/paulagrata/poodle/)]
 [gameplay]
 - **ESC:** pause
 - **WASD/arrows:** move around
-- **E:** switches seeds
-- **F:** plant seed
 - **SPACE:** use tool
-- **ENTER:** when next to bed to sleep
+- **F:** plant seed
+- **Q:** switches tools
+- **E:** switches seeds
+- **ENTER:** (near bed) sleep
   
 [shop]
-- **ENTER:** go into shop
+- **ENTER:** (near merchant) go into shop
 - **arrows:** move up and down
 - **SPACE:** purchase/sell
 - **0:** exit [will fix in future to use ESC]
