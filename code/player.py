@@ -215,6 +215,13 @@ class Player(pygame.sprite.Sprite):
                 self.stat_updater.player.health = 100
                 print('cheater')
 
+            # run FASTAAAAA
+            if keys[pygame.K_LSHIFT]:
+                self.speed = FORESTSPEED
+                print('RUN FOREST')
+            else:
+                self.speed = SPEED
+
     def get_status(self):
         #if player is not moving = set idle
         if self.direction.magnitude() == 0:
