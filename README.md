@@ -17,6 +17,22 @@ a Stardew Valley-inspired RPG, featuring farming, foraging, day-night cycles, we
 2. open `poodle/code` folder
 3. run program `python poodle.py`
 
+## keys
+[gameplay]
+- **ESC:** pause
+- **WASD/arows:** move around
+- **E:** switches seeds
+- **F:** plant seed
+- **SPACE:** use tool
+[shop]
+- **ENTER:** go into shop
+- **arows:** move up and down
+- **SPACE:** purchase/sell
+- **0:** exit [will fix in future to use ESC]
+[cheats]
+- you must figure that out :-)
+
+
 ## current implementations:
 - shop displays buy items as seeds
 - shop displays item price and inventory amount
