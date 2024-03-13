@@ -64,7 +64,7 @@ class Menu:
         keys = pygame.key.get_pressed()
         self.timer.update()
 
-        if keys[pygame.K_0]:
+        if keys[pygame.K_ESCAPE]:
             self.toggle_menu()
         
         if not self.timer.active:

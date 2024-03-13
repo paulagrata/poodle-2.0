@@ -221,6 +221,7 @@ class Level:
         # shop
         elif self.shop_active:
             self.pause()
+            self.paused.active = False
             self.menu.update()
         # nothing open: [normal]
         else:
