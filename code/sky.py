@@ -14,7 +14,6 @@ class Sky():
         self.paused_color = None
         self.paused = False
         
-
     def display(self, dt):
         if not self.paused:
             for index, value in enumerate(self.end_color):
@@ -59,7 +58,6 @@ class Drop(Generic):
         # timer
         if pygame.time.get_ticks() - self.start_time >= self.lifetime:
             self.kill()
-
 
 class Rain:
     def __init__(self, all_sprites):

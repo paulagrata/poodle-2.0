@@ -67,7 +67,6 @@ class Tree(Generic):
     def __init__(self, pos, surf, groups, all_sprites, name, player_add):
         super().__init__(pos, surf, groups)
 
-
         # tree attributes
         self.health = 5
         self.alive = True
