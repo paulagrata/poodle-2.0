@@ -49,8 +49,8 @@ tutorial version: [[github](https://github.com/paulagrata/poodle/)]
 - pause menu! successfully pauses the game. [still need needs paused]
 - need cheat! will reset needs to full amount
 
- ## fixes
-- tree apples when day resets
+ ## bugs
+- tree apples on empty trees displaying when day resets
 
 ## future updates:
 - UI
