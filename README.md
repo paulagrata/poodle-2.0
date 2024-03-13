@@ -26,6 +26,7 @@ tutorial version: [[github](https://github.com/paulagrata/poodle/)]
 - **E:** switches seeds
 - **F:** plant seed
 - **SPACE:** use tool
+- **ENTER:** when next to bed to sleep
   
 [shop]
 - **ENTER:** go into shop
