@@ -13,6 +13,7 @@ from random import randint
 from menu import Menu
 from ui import UI
 from stats import StatUpdater
+from pause import Pause
 
 
 class Level:
@@ -50,6 +51,10 @@ class Level:
 
         # clock
         self.clock = Clock()
+
+        # pause 
+        self.paused = Pause(self.toggle_pause)
+        self.pause_active = False
 
         # music
         self.success = pygame.mixer.Sound('audio/success.wav')
@@ -107,7 +112,8 @@ class Level:
                     tree_sprites = self.tree_sprites,
                     interaction = self.interaction_sprites,
                     soil_layer = self.soil_layer,
-                    toggle_shop = self.toggle_shop)
+                    toggle_shop = self.toggle_shop,
+                    toggle_pause= self.toggle_pause)
                 
             if obj.name == 'Bed':
                 Interaction(
@@ -134,9 +140,11 @@ class Level:
     def player_add(self,item):
         self.player.item_inventory[item] += 1
         self.success.play()
+    
+    def toggle_pause(self):
+        self.pause_active = not self.pause_active #switching on and off.
 
     def toggle_shop(self):
-
         self.shop_active = not self.shop_active #switching on and off.
 
     def plant_collision(self):
@@ -181,26 +189,24 @@ class Level:
         self.clock.get_time = 0
 
         self.stats.reset()
+        self.ui.reset(self.player)
 
     def pause(self):
         self.clock.pause()
         self.overlay.pause()
         self.sky.pause()
         self.stats.pause()
-        self.overlay.pause()
 
     def resume(self):
         self.clock.resume()
         self.overlay.resume()
         self.sky.resume()
         self.stats.resume()
-        self.overlay.resume()
-
 
     def run(self,dt):
 
         # drawing logic
-        self.display_surface.fill('pink')
+        self.display_surface.fill('#9CD5C3')
         #self.all_sprites.draw(self.display_surface)
         self.all_sprites.custom_draw(self.player)
 
@@ -208,19 +214,26 @@ class Level:
         self.overlay.display()
         self.ui.display(self.player)
 
-        # updates
-        if self.shop_active:
+        # pause
+        if self.pause_active:
+            self.paused.update()
+            self.pause()
+        # shop
+        elif self.shop_active:
             self.pause()
             self.menu.update()
+        # nothing open: [normal]
         else:
             self.resume()
             self.all_sprites.update(dt, self.all_sprites)
             self.plant_collision()
         
         # weather 
-        if self.raining and not self.shop_active:   # rain
+        if self.raining and not self.shop_active and not self.pause_active:   # rain
             self.rain.update(dt, self.all_sprites)
-        self.sky.display(dt)                        # daytime 
+        
+        # daytime 
+        self.sky.display(dt)                        
 
         # transition overlay
         if self.player.sleep:
@@ -233,6 +246,8 @@ class Level:
         #print(self.player.item_inventory)      # prints player's inventory
         #print(self.player.seed_inventory)      # prints player's seed inventory
         #print(self.shop_active)                 # prints if shop is active
+        #print('health: ', self.player.health)
+        #print('energy: ', self.player.energy)
 
 class CameraGroup(pygame.sprite.Group):
     def __init__(self):

@@ -13,8 +13,6 @@ class Overlay:
         overlay_path = 'graphics/overlay/'
         self.tools_surf = {tool: pygame.image.load(f'{overlay_path}{tool}.png').convert_alpha() for tool in player.tools}
         self.seeds_surf = {seed: pygame.image.load(f'{overlay_path}{seed}.png').convert_alpha() for seed in player.seeds}
-        #print(self.tools_surf)
-        #print(self.seeds_surf)
 
         #font
         self.font = pygame.font.Font('font/LycheeSoda.ttf', 30)
@@ -33,11 +31,8 @@ class Overlay:
 
         #inventory amount
         amount = self.player.seed_inventory[self.player.selected_seed]
-        #print(amount) 
-        #print(self.player.selected_seed)
         amount_surf = self.font.render(f'{amount}', False, 'White')
         amount_rect = amount_surf.get_rect(midbottom = OVERLAY_POSITIONS['seedinventory'])
-        #pygame.draw.rect(self.display_surface, (0, 0, 0), amount_rect.inflate(10, 10))
         self.display_surface.blit(amount_surf,amount_rect)
 
     def pause(self):
