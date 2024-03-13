@@ -23,7 +23,7 @@ class Clock:
         # time 
         time_str = self.time()
         text_surface = self.font.render(str(time_str), True, (255, 255, 255))  # Render the time as text
-        time_rect = text_surface.get_rect(midbottom=(SCREEN_WIDTH // 2, SCREEN_HEIGHT - 10)) 
+        time_rect = text_surface.get_rect(topright=(SCREEN_WIDTH - 10, 10)) 
         self.display_surface.blit(text_surface, time_rect)
 
 

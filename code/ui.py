@@ -16,13 +16,11 @@ class UI:
 
 
     def show_money(self, player):
-        self.font = pygame.font.Font(UI_FONT,30)
-        text_surf = self.font.render(f'${player.money}', False, 'Black')
-        text_rect = text_surf.get_rect(topright=(SCREEN_WIDTH - 10, 10))
-
-        pygame.draw.rect(self.display_surface, 'White', text_rect.inflate(10,10),0,6) # 0,6 rounds it.
-
-        self.display_surface.blit(text_surf,text_rect)
+        self.font = pygame.font.Font(UI_FONT,25)
+        text_surf = self.font.render(f'${player.money}', False, (0, 0, 0))  # Black color
+        text_rect = text_surf.get_rect()
+        text_rect.bottomright = (self.display_surface.get_width() - 10, self.display_surface.get_height() - 60)
+        self.display_surface.blit(text_surf, text_rect)
 
     def show_bar(self,current, max_amount, bg_rect, color):
 
@@ -43,13 +41,14 @@ class UI:
         #print(MOOD_COLORS['energy'])
         self.show_bar(player.energy, player.stats['energy'], self.energy_bar_rect, MOOD_COLORS['energy'])
         self.show_bar(player.health, player.stats['health'], self.health_bar_rect, MOOD_COLORS['health'])
-
-        
+   
     def display(self, player):
         #pygame.draw.rect(self.display_surface,'black',self.health_bar_rect)
 
         # moods [ need to fix ]
-        moods = ['health', 'energy']        
+
+        """
+         moods = ['health', 'energy']        
         for mood in moods:
             # mood UI
             #print(getattr(player, mood))
@@ -58,6 +57,8 @@ class UI:
                 #print('greater than 30')
             else:
                 MOOD_COLORS[mood] = 'Red'
+        """
+        
         self.reset(player)
 
 
