@@ -42,4 +42,3 @@ class Pause:
     def update(self):
         self.input()
         self.display()
-        print(self.active)

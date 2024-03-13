@@ -7,8 +7,10 @@ from stats import StatUpdater
 # pos - position
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self, pos, group, collision_sprites, tree_sprites, interaction, soil_layer, toggle_shop):
+    def __init__(self, pos, group, collision_sprites, tree_sprites, interaction, soil_layer, toggle_shop, toggle_pause):
         super().__init__(group)
+
+        self.escape_pressed = False 
 
         self.import_assets()
         self.status = 'down_idle'
@@ -66,7 +68,7 @@ class Player(pygame.sprite.Sprite):
         self.money = 200
 
         # stats
-        self.stats = {'health': 100, 'energy': 100, 'speed': 500}
+        self.stats = {'health': 100, 'energy': 100, 'speed': SPEED}
         self.health = self.stats ['health'] 
         self.energy = self.stats ['energy']
         self.speed = self.stats ['speed']
@@ -78,6 +80,7 @@ class Player(pygame.sprite.Sprite):
         self.sleep = False
         self.soil_layer = soil_layer
         self.toggle_shop = toggle_shop
+        self.toggle_pause = toggle_pause
 
         # sounds
         self.watering = pygame.mixer.Sound('audio/water.mp3')
@@ -134,6 +137,15 @@ class Player(pygame.sprite.Sprite):
 
     def input(self):
         keys = pygame.key.get_pressed()
+
+        # pause
+        if keys[pygame.K_ESCAPE] and not self.escape_pressed: 
+            # paused
+            self.toggle_pause()
+            self.escape_pressed = True 
+        elif not keys[pygame.K_ESCAPE]: 
+            # resumed
+            self.escape_pressed = False 
         
         if not self.timers['tool use'].active and not self.sleep:
 			# directions 
@@ -171,7 +183,7 @@ class Player(pygame.sprite.Sprite):
                 self.selected_tool = self.tools[self.tool_index]
 
             # seed use
-            if keys[pygame.K_LCTRL]:
+            if keys[pygame.K_f]:
                 # timer for the tool use
                 self.timers['seed use'].activate()
                 self.direction = pygame.math.Vector2()
@@ -196,6 +208,12 @@ class Player(pygame.sprite.Sprite):
                     else:
                         self.status = 'left_idle'
                         self.sleep = True
+
+            # cheats
+            if keys[pygame.K_LSHIFT] and keys[pygame.K_LCTRL] and keys[pygame.K_c]:
+                self.stat_updater.reset()
+                self.stat_updater.player.health = 100
+                print('cheater')
 
     def get_status(self):
         #if player is not moving = set idle
@@ -258,11 +276,5 @@ class Player(pygame.sprite.Sprite):
         self.update_timers()
         self.get_target_pos()
         self.stat_updater.update()
-
         self.move(dt)
         self.animate(dt)
-
-
-
-        #debug
-        #print(f"Health: {self.health}, Energy: {self.energy}")
