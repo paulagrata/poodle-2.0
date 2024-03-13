@@ -12,6 +12,9 @@ class Pause:
         self.color = "BLACK"
         self.text = "Paused"
         self.subtext = "Press ESC to Resume"
+
+        # menu
+        self.active = True
         
         # setup 
         self.setup()
@@ -27,11 +30,9 @@ class Pause:
       
     def input(self):
         keys = pygame.key.get_pressed()
-
-        #if keys[pygame.K_ESCAPE]:
-            #self.toggle_pause()
-            #pass
-
+        if keys[pygame.K_ESCAPE] and not self.active:
+            self.toggle_pause()
+        self.active = keys[pygame.K_ESCAPE] 
 
     def display(self):
         self.display_surface.blit(self.text_surface, self.text_rect)
@@ -41,3 +42,4 @@ class Pause:
     def update(self):
         self.input()
         self.display()
+        print(self.active)
