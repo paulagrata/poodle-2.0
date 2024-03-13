@@ -16,6 +16,9 @@ class Clock:
         self.time_elapsed = 0
         self.clock = pygame.time.Clock()
 
+        # days
+        self.days = 0   
+        self.day_incremented = False
 
 
     def display(self):
@@ -25,6 +28,12 @@ class Clock:
         text_surface = self.font.render(str(time_str), True, (255, 255, 255))  # Render the time as text
         time_rect = text_surface.get_rect(topright=(SCREEN_WIDTH - 10, 10)) 
         self.display_surface.blit(text_surface, time_rect)
+
+
+        # day
+        day_text_surface = self.font.render(f"Day: {self.days}", True, (255, 255, 255))
+        day_text_rect = day_text_surface.get_rect(topright=(SCREEN_WIDTH - 10, 30))
+        self.display_surface.blit(day_text_surface, day_text_rect)
 
 
     def time(self):
@@ -38,6 +47,12 @@ class Clock:
         hours, minutes = divmod(minutes, 60) 
         
         hours += 10 # 10am
+
+        # days
+        if hours == 10 and not self.day_incremented:
+            self.days += 1
+            self.day_incremented = True
+
 
         # stops at 3am
         if hours >= 27:

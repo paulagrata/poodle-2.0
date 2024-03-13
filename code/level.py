@@ -61,6 +61,7 @@ class Level:
         self.success.set_volume(0.1)
         self.music = pygame.mixer.Sound('audio/sprouting.mp3')
         self.music.play(loops = -1).set_volume(0.2)
+
         
     def setup(self, all_sprites):
         tmx_data = load_pygame('data/map.tmx')
@@ -187,6 +188,7 @@ class Level:
         # clock
         self.clock.time_elapsed = 0
         self.clock.get_time = 0
+        self.clock.day_incremented = False
 
         self.stats.reset()
         self.ui.reset(self.player)
