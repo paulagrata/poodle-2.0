@@ -34,7 +34,7 @@ tutorial version: [[github](https://github.com/paulagrata/poodle/)]
 - **ENTER:** (near merchant) go into shop
 - **arrows:** move up and down
 - **SPACE:** purchase/sell
-- **0:** exit [will fix in future to use ESC]
+- **ESC:** exit shop
   
 [cheats]
 - you must figure that out :-)
