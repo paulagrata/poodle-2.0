@@ -26,15 +26,21 @@ a Stardew Valley-inspired RPG, featuring farming, foraging, day-night cycles, we
 - clock starts at 10am + stops at 3am, resets upon sleeping
 - fixed seeds, will place only when at soil + removes from inventory
 - health/energy backend + frontend
+- pause menu! successfully pauses the game. [still need needs paused]
+- need cheat! will reset needs to full amount
+
+ ## fixes
+- tree apples when day resets
 
 ## future updates:
 - UI
 - map
 - NPCs
 - enemies
+- pause menu [backend done, need frontend]
 - save/load game
 - ~~clock/time~~ [done!]
-- ~~properly working seeds~~ [done!] 
+- ~~properly working seeds~~ [done!]
 
 [[asset pack](https://cupnooble.itch.io/)]
 
