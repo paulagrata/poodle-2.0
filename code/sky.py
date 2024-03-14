@@ -11,6 +11,7 @@ class Sky():
         self.full_surf = pygame.Surface((SCREEN_WIDTH, SCREEN_HEIGHT))
         self.start_color = [255,255,255]
         self.end_color = [38,101,189]
+        self.transition_speed = .5
         self.paused_color = None
         self.paused = False
         
@@ -18,7 +19,7 @@ class Sky():
         if not self.paused:
             for index, value in enumerate(self.end_color):
                 if self.start_color[index] > value:
-                    self.start_color[index] -= 2 * dt
+                    self.start_color[index] -= self.transition_speed * dt
                     
             self.full_surf.fill(self.start_color)
             self.display_surface.blit(self.full_surf, (0,0), special_flags=pygame.BLEND_RGB_MULT)
