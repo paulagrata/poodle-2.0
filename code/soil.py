@@ -76,9 +76,9 @@ class SoilLayer:
 
         # sounds
         self.hoe_sound = pygame.mixer.Sound('audio/hoe.wav')
-        self.hoe_sound.set_volume(0.05)
+        self.hoe_sound.set_volume(0.02)
         self.plant_sound = pygame.mixer.Sound('audio/plant.wav')
-        self.plant_sound.set_volume(0.1)
+        self.plant_sound.set_volume(0.02)
         
 
     def create_soil_grid(self):
@@ -101,7 +101,6 @@ class SoilLayer:
     def get_hit(self, point):
         for rect in self.hit_rects:
             if rect.collidepoint(point):
-                self.hoe_sound.play()
                 x = rect.x // TILE_SIZE
                 y = rect.y // TILE_SIZE
 
@@ -109,9 +108,12 @@ class SoilLayer:
                     #print('boop. farmable')
                     self.grid[y][x].append('X')
                     self.create_soil_tiles()
+                    self.hoe_sound.play()
 
                     if self.raining:
                         self.water_all()
+
+                    return True
     
     def water(self, target_pos):
         for soil_sprite in self.soil_sprites.sprites():
@@ -125,6 +127,7 @@ class SoilLayer:
                     pos = soil_sprite.rect.topleft, 
                     surf = choice(self.water_surfs), 
                     groups =[self.all_sprites, self.water_sprites] )
+                return True
 
     def plant_seed(self, target_pos, seed):
         for soil_sprite in self.soil_sprites.sprites():
@@ -150,11 +153,9 @@ class SoilLayer:
             plant.grow()
 
     def water_all(self):
-        print("water_all() called")  # Check if the method is being called
         for index_row, row in enumerate(self.grid):
             for index_col, cell in enumerate(row):
                 if 'X' in cell and 'W' not in cell:
-                    print(f"Creating WaterTile at ({index_col}, {index_row})")  # Print the position of each WaterTile
                     cell.append('W')
                     x = index_col * TILE_SIZE
                     y = index_row * TILE_SIZE
