@@ -12,17 +12,17 @@ class UI:
 
         # bar setup
         self.health_bar_rect = pygame.Rect(790 - BAR_WIDTH ,570,BAR_WIDTH,BAR_HEIGHT)    #l,t,w,h
-        self.energy_bar_rect = pygame.Rect(790 - BAR_WIDTH ,546,BAR_WIDTH,BAR_HEIGHT)
+        self.energy_bar_rect = pygame.Rect(790 - BAR_WIDTH ,535,BAR_WIDTH,BAR_HEIGHT)
 
 
     def show_money(self, player):
         self.font = pygame.font.Font(UI_FONT,25)
         text_surf = self.font.render(f'${player.money}', False, (0, 0, 0))  # Black color
         text_rect = text_surf.get_rect()
-        text_rect.bottomright = (self.display_surface.get_width() - 10, self.display_surface.get_height() - 60)
+        text_rect.bottomright = (self.display_surface.get_width() - 10, self.display_surface.get_height() - 70)
         self.display_surface.blit(text_surf, text_rect)
 
-    def show_bar(self,current, max_amount, bg_rect, color):
+    def show_bar(self,current, max_amount, bg_rect, color, label):
 
         # draw background
         pygame.draw.rect(self.display_surface, UI_BG_COLOR, bg_rect)
@@ -37,12 +37,24 @@ class UI:
         pygame.draw.rect(self.display_surface,color,current_rect)
         pygame.draw.rect(self.display_surface, UI_BORDER_COLOR,bg_rect,3)
 
+        # need labels
+        text_surf = pygame.font.Font(UI_FONT, 15).render(label, True, (255, 255, 255))
+        text_rect = text_surf.get_rect()
+        text_rect.midtop = (bg_rect.left + 23, bg_rect.top - 15)
+        self.display_surface.blit(text_surf, text_rect)
+
     def reset(self,player):
         #print(MOOD_COLORS['energy'])
-        self.show_bar(player.energy, player.stats['energy'], self.energy_bar_rect, MOOD_COLORS['energy'])
-        self.show_bar(player.health, player.stats['health'], self.health_bar_rect, MOOD_COLORS['health'])
-   
+        self.show_bar(player.energy, player.stats['energy'], self.energy_bar_rect, MOOD_COLORS['energy'], "Energy")
+        self.show_bar(player.health, player.stats['health'], self.health_bar_rect, MOOD_COLORS['health'], "Health")
+
     def display(self, player):
+
+        self.reset(player)
+        # money ui
+        self.show_money(player)
+
+
         #pygame.draw.rect(self.display_surface,'black',self.health_bar_rect)
 
         # moods [ need to fix ]
@@ -58,9 +70,3 @@ class UI:
             else:
                 MOOD_COLORS[mood] = 'Red'
         """
-        
-        self.reset(player)
-
-
-        # money ui
-        self.show_money(player)
