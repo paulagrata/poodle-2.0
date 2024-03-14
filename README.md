@@ -41,21 +41,26 @@ tutorial version: [[github](https://github.com/paulagrata/poodle/)]
 
 
 ## current implementations:
-- shop displays buy items as seeds
-- shop displays item price and inventory amount
-- shop pauses sky transition
-- clock backend + frontend [needs updating]
-- clock will pause when using shop
-- clock starts at 10am + stops at 3am, resets upon sleeping
-- fixed seeds, will place only when at soil + removes from inventory
-- health/energy backend + frontend
-- pause menu! successfully pauses the game. [still need needs paused]
-- need cheat! will reset needs to full amount
-- added running feature
-- day # displays
+- **3.5** shop displays buy items as seeds
+- **3.5** shop displays item price and inventory amount
+- **3.5** shop pauses sky transition
+- **3.6** clock backend + frontend [needs updating]
+- **3.6** clock will pause when using shop
+- **3.7** clock starts at 10am + stops at 3am, resets upon sleeping
+- **3.8** fixed seeds, will place only when at soil + removes from inventory
+- **3.8** health/energy backend + frontend
+- **3.13** pause menu! successfully pauses the game. [still need needs paused]
+- **3.13** need cheat! will reset needs to full amount
+- **3.13** added running feature
+- **3.13** day # displays
+- **3.14** needs pause!
+- **3.14** updated needs/stats to go with in-game time
+- **3.14** updated some of the UI :D
 
  ## bugs
 - tree apples on empty trees displaying when day resets
+- hoe sounds anytime it is used - needs to be only when tile is placed
+- ~~seeds plant anywhere [not visably] and deduct from inventory~~ [fixed!]
 
 ## future updates:
 - UI
@@ -65,7 +70,6 @@ tutorial version: [[github](https://github.com/paulagrata/poodle/)]
 - pause menu [backend done, need frontend]
 - save/load game
 - ~~clock/time~~ [done!]
-- ~~properly working seeds~~ [done!]
 
 [[asset pack](https://cupnooble.itch.io/)]
 
