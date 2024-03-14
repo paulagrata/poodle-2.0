@@ -3,6 +3,7 @@ from settings import *
 from support import *
 from timers import Timer
 from stats import StatUpdater
+from clock import Clock
 
 # pos - position
 
@@ -72,7 +73,9 @@ class Player(pygame.sprite.Sprite):
         self.health = self.stats ['health'] 
         self.energy = self.stats ['energy']
         self.speed = self.stats ['speed']
-        self.stat_updater = StatUpdater(self)
+        clock = Clock() 
+        self.stat_updater = StatUpdater(self, clock) 
+
 
         # interaction
         self.tree_sprites = tree_sprites

@@ -4,8 +4,8 @@ from pygame.math import Vector2
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
 TILE_SIZE = 64
-SPEED = 300
-FORESTSPEED = 500
+SPEED = 500
+FORESTSPEED = 700
 
 # apple positions
 APPLE_POS = {
