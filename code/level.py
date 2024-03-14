@@ -41,16 +41,16 @@ class Level:
         self.soil_layer.raining = self.raining
         self.sky = Sky()
 
+        # clock
+        self.clock = Clock()
+
         # ui
         self.ui = UI()
-        self.stats = StatUpdater(self.player)
+        self.stats = StatUpdater(self.player, self.clock)
 
         # shop
         self.menu = Menu(self.player, self.toggle_shop)
         self.shop_active = False
-
-        # clock
-        self.clock = Clock()
 
         # pause 
         self.paused = Pause(self.toggle_pause)
@@ -245,11 +245,12 @@ class Level:
         # clock
         self.clock.display()
 
+
         # testing [debug]:
         #print(self.player.item_inventory)      # prints player's inventory
         #print(self.player.seed_inventory)      # prints player's seed inventory
         #print(self.shop_active)                 # prints if shop is active
-        #print('health: ', self.player.health)
+        print('health: ', self.player.health)
         #print('energy: ', self.player.energy)
 
 class CameraGroup(pygame.sprite.Group):
