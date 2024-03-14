@@ -16,8 +16,10 @@ APPLE_POS = {
 # overlay positions
 OVERLAY_POSITIONS = {
     'tool': (40, SCREEN_HEIGHT - 15),
-    'seed': (85, SCREEN_HEIGHT - 5),
+    'seed': (90, SCREEN_HEIGHT - 20),
+    'inventory': (145, SCREEN_HEIGHT - 15),
     'seedinventory': (115, SCREEN_HEIGHT - 5),
+    'iteminventory': (170, SCREEN_HEIGHT - 5),
     'clock': (750, SCREEN_HEIGHT - 5)   #760
 }
 
