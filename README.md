@@ -28,6 +28,7 @@ tutorial version: [[github](https://github.com/paulagrata/poodle/)]
 - **Q:** switches tools
 - **E:** switches seeds
 - **G:** switches invetory item [will update]
+- **B:** eat!! [will update]
 - **SHIFT:** turns you into forest gump
 - **ENTER:** (near bed) sleep
   
@@ -61,19 +62,29 @@ tutorial version: [[github](https://github.com/paulagrata/poodle/)]
 - **3.14** can go sort through inventory items with G
 - **3.14** added energy depletion per axe/hoe/watering
 - **3.14** updated sounds to only occur when action takes place [hoe, water]
+- **3.15** poodle can now eat [which gains health]
 
  ## bugs
 - tree apples on empty trees displaying when day resets
+- hoe should not be able to make a tile on tiles that are already created
 - ~~hoe sounds anytime it is used - needs to be only when tile is placed~~ [fixed!]
 - ~~seeds plant anywhere [not visably] and deduct from inventory~~ [fixed!]
 
 ## future updates:
 - UI
-- map
+  - inventory bar - this will allow user to go through the bar to select tool, seed, item
+  - day/clock/season area
+  - needs bars + add more needs
+  - character ui - maybe similiar to sims style
+  - pause menu
+- map!!
 - NPCs
 - enemies
-- pause menu [backend done, need frontend]
+- moodlets??
+- mailbox/phones/computer - jobs
+- user settings [sounds, screen size, more]
 - save/load game
+- ~~pause menu~~ [backend done!]
 - ~~clock/time~~ [done!]
 
 [[asset pack](https://cupnooble.itch.io/)]
