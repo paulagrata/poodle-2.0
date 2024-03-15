@@ -39,7 +39,8 @@ class Player(pygame.sprite.Sprite):
             'tool switch': Timer(200),
             'seed use': Timer(350, self.use_seed),
             'seed switch': Timer(200),
-            'inventory switch': Timer(200)
+            'inventory switch': Timer(200),
+            'eat': Timer(350, self.eat),
         }
 
         # tools
@@ -60,7 +61,7 @@ class Player(pygame.sprite.Sprite):
         # items
         self.item_inventory = {
             'wood':   0,
-            'apple':  0,
+            'apple':  5,
             'corn':   0,
             'tomato': 0
         }
@@ -92,6 +93,10 @@ class Player(pygame.sprite.Sprite):
         # sounds
         self.watering = pygame.mixer.Sound('audio/water.mp3')
         self.watering.set_volume(0.1)
+        self.eating = pygame.mixer.Sound('audio/eat.mp3')
+        self.eating.set_volume(0.1)
+        self.wood = pygame.mixer.Sound('audio/wood.mp3')
+        self.wood.set_volume(0.1)
         
     def use_tool(self):
         #print(self.selected_tool)
@@ -114,14 +119,22 @@ class Player(pygame.sprite.Sprite):
     def get_target_pos(self):
         self.target_pos = self.rect.center + PLAYER_TOOL_OFFSET[self.status.split('_')[0]]
 
+    def eat(self):
+        if self.item_inventory[self.selected_inventory] > 0:
+            if self.health < 100:
+                self.item_inventory[self.selected_inventory] -= 1
+                if self.selected_inventory == "wood":
+                    self.health -= 5
+                    self.wood.play()
+                else:
+                    self.health += 5
+                    self.eating.play()
+
     def use_seed(self):
         if self.seed_inventory[self.selected_seed] > 0:
             if self.soil_layer.plant_seed(self.target_pos, self.selected_seed):
                 self.seed_inventory[self.selected_seed] -= 1
                 self.energy -= .5
-            else:
-                print("plant not planted.")
-            print(self.seed_inventory)
 
     def import_assets(self):
         self.animations = {
@@ -201,6 +214,14 @@ class Player(pygame.sprite.Sprite):
                 self.frame_index = 0
                 #print('use seed')
 
+            # eat
+            if keys[pygame.K_b]:
+                # timer for the tool use
+                self.timers['eat'].activate()
+                self.direction = pygame.math.Vector2()
+                self.frame_index = 0
+                #print('use seed')
+
             # change seed
             if keys[pygame.K_e] and not self.timers['seed switch'].active:
                 self.timers['seed switch'].activate()
@@ -238,7 +259,10 @@ class Player(pygame.sprite.Sprite):
                 self.speed = FORESTSPEED
                 print('RUN FOREST')
             else:
-                self.speed = SPEED
+                if self.energy <= 30:
+                    self.speed = WOOZYSPEED
+                else:
+                    self.speed = SPEED
 
     def get_status(self):
         #if player is not moving = set idle
