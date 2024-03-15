@@ -22,11 +22,6 @@ class StatUpdater:
             self.player.health = max(0, self.player.health)
             self.player.energy = max(0, self.player.energy)
 
-            # sweepy self 
-            if self.player.energy <= 30:
-                self.player.speed = 100
-
-
     def pause(self):
         self.active = False
 
