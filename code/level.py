@@ -250,8 +250,8 @@ class Level:
         #print(self.player.item_inventory)      # prints player's inventory
         #print(self.player.seed_inventory)      # prints player's seed inventory
         #print(self.shop_active)                 # prints if shop is active
-        print('health: ', self.player.health)
-        #print('energy: ', self.player.energy)
+        #print('health: ', self.player.health)
+        print('energy: ', self.player.energy)
 
 class CameraGroup(pygame.sprite.Group):
     def __init__(self):
