@@ -29,6 +29,7 @@ tutorial version: [[github](https://github.com/paulagrata/poodle/)]
 - **E:** switches seeds
 - **G:** switches invetory item [will update]
 - **B:** eat!! [will update]
+- **X:** closes notification
 - **SHIFT:** turns you into forest gump
 - **ENTER:** (near bed) sleep
   
@@ -63,6 +64,7 @@ tutorial version: [[github](https://github.com/paulagrata/poodle/)]
 - **3.14** added energy depletion per axe/hoe/watering
 - **3.14** updated sounds to only occur when action takes place [hoe, water]
 - **3.15** poodle can now eat [which gains health]
+- **3.15** notifications!!!
 
  ## bugs
 - tree apples on empty trees displaying when day resets
