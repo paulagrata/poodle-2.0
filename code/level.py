@@ -14,6 +14,7 @@ from menu import Menu
 from ui import UI
 from stats import StatUpdater
 from pause import Pause
+from notification import Notification
 
 
 class Level:
@@ -55,6 +56,10 @@ class Level:
         # pause 
         self.paused = Pause(self.toggle_pause)
         self.pause_active = False
+
+        # notifications
+        self.notification = Notification(self.toggle_notification, text='')
+        self.notification_active = False
 
         # music
         self.success = pygame.mixer.Sound('audio/success.wav')
@@ -114,7 +119,8 @@ class Level:
                     interaction = self.interaction_sprites,
                     soil_layer = self.soil_layer,
                     toggle_shop = self.toggle_shop,
-                    toggle_pause= self.toggle_pause)
+                    toggle_pause= self.toggle_pause,
+                    toggle_notification = self.toggle_notification)
                 
             if obj.name == 'Bed':
                 Interaction(
@@ -141,7 +147,11 @@ class Level:
     def player_add(self,item):
         self.player.item_inventory[item] += 1
         self.success.play()
-    
+
+    def toggle_notification(self, text):
+        self.notification = Notification(self.toggle_notification, text)
+        self.notification_active = not self.notification_active #switching on and off.
+
     def toggle_pause(self):
         self.pause_active = not self.pause_active #switching on and off.
 
@@ -230,6 +240,10 @@ class Level:
             self.resume()
             self.all_sprites.update(dt, self.all_sprites)
             self.plant_collision()
+
+        # notifications
+        if self.notification_active:
+            self.notification.update()
         
         # weather 
         if self.raining and not self.shop_active and not self.pause_active:   # rain
@@ -251,7 +265,7 @@ class Level:
         #print(self.player.seed_inventory)      # prints player's seed inventory
         #print(self.shop_active)                 # prints if shop is active
         #print('health: ', self.player.health)
-        print('energy: ', self.player.energy)
+        #print('energy: ', self.player.energy)
 
 class CameraGroup(pygame.sprite.Group):
     def __init__(self):
