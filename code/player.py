@@ -8,7 +8,7 @@ from clock import Clock
 # pos - position
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self, pos, group, collision_sprites, tree_sprites, interaction, soil_layer, toggle_shop, toggle_pause):
+    def __init__(self, pos, group, collision_sprites, tree_sprites, interaction, soil_layer, toggle_shop, toggle_pause, toggle_notification):
         super().__init__(group)
 
         self.escape_pressed = False 
@@ -89,6 +89,7 @@ class Player(pygame.sprite.Sprite):
         self.soil_layer = soil_layer
         self.toggle_shop = toggle_shop
         self.toggle_pause = toggle_pause
+        self.toggle_notification = toggle_notification
 
         # sounds
         self.watering = pygame.mixer.Sound('audio/water.mp3')
@@ -126,6 +127,7 @@ class Player(pygame.sprite.Sprite):
                 if self.selected_inventory == "wood":
                     self.health -= 5
                     self.wood.play()
+                    self.toggle_notification(text= "wood isn't very good....")
                 else:
                     self.health += 5
                     self.eating.play()
