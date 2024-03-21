@@ -65,6 +65,7 @@ tutorial version: [[github](https://github.com/paulagrata/poodle/)]
 - **3.14** updated sounds to only occur when action takes place [hoe, water]
 - **3.15** poodle can now eat [which gains health]
 - **3.15** notifications!!!
+- **3.21** updated pause menu UI
 
  ## bugs
 - tree apples on empty trees displaying when day resets
@@ -78,7 +79,7 @@ tutorial version: [[github](https://github.com/paulagrata/poodle/)]
   - day/clock/season area
   - needs bars + add more needs
   - character ui - maybe similiar to sims style
-  - pause menu
+  - ~~pause menu~~ [done!]
 - map!!
 - NPCs
 - enemies
@@ -86,7 +87,13 @@ tutorial version: [[github](https://github.com/paulagrata/poodle/)]
 - mailbox/phones/computer - jobs
 - user settings [sounds, screen size, more]
 - save/load game
-- ~~pause menu~~ [backend done!]
+- pause menu
+  - ~~pauses game~~ [done!]
+  - save game
+  - load game
+  - new game
+  - settings
+      - settings front+backend
 - ~~clock/time~~ [done!]
 
 [[asset pack](https://cupnooble.itch.io/)]
