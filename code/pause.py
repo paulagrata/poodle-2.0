@@ -66,22 +66,29 @@ class Pause:
         
         if not self.timer.active:
             if keys[pygame.K_UP]:
-                print('up')
                 self.index -= 1
                 self.timer.activate()
 
             if keys[pygame.K_DOWN]:
-                print('down')
                 self.index += 1
                 self.timer.activate()
 
             if keys[pygame.K_SPACE]:
                 self.timer.activate()
+
+                selected_option = self.options[self.index]
+                if selected_option == self.options[0]:  # save
+                    print('save game')
+                elif selected_option == self.options[1]: # load
+                    print('load game')
+                elif selected_option == self.options[2]: # new
+                    print('new game')
+                elif selected_option == self.options[3]: # settings
+                    print('settings')
                         
         # allow scroll to restart
         self.index %= len(self.options)
                         
-
     def display(self, text_surf, top, selected):
 
         # title
