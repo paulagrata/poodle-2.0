@@ -96,10 +96,7 @@ class Menu:
                         self.player.money -= PURCHASE_PRICES[current_item]
                         
         #clamo the values
-        if self.index < 0:
-            self.index = len(self.options) - 1
-        if self.index > len(self.options) - 1:
-            self.index = 0
+        self.index %= len(self.options)
                         
     def show_entry(self, text_surf, amount, top, selected):
 
