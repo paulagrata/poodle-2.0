@@ -15,6 +15,7 @@ class Clock:
         self.active = True
         self.time_elapsed = 0
         self.clock = pygame.time.Clock()
+        self.load_time = 0
 
         # days
         self.days = 0   
@@ -60,7 +61,7 @@ class Clock:
         # time stops at 3am
         if hours >= 27:
             self.pause()
-            return "3 AM"
+            return "3:00 AM"
 
         hours = hours % 24 
         am_pm = "AM" if hours < 12 else "PM"
@@ -69,6 +70,7 @@ class Clock:
         minutes = min(((minutes + 5) // 10) * 10, 50)
         
         time_str = "{:2d}:{:02d} {}".format(display_hours, minutes, am_pm)
+        self.load_time = time_str
         return time_str
         
     def pause(self):
