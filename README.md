@@ -66,6 +66,8 @@ tutorial version: [[github](https://github.com/paulagrata/poodle/)]
 - **3.15** poodle can now eat [which gains health]
 - **3.15** notifications!!!
 - **3.21** updated pause menu UI
+- **3.22** pause menu: save works!
+- **3.22** pause menu: load works!
 
  ## bugs
 - tree apples on empty trees displaying when day resets
