@@ -38,7 +38,7 @@ class UI:
         pygame.draw.rect(self.display_surface, UI_BORDER_COLOR,bg_rect,3)
 
         # need labels
-        text_surf = pygame.font.Font(UI_FONT, 15).render(label, True, (255, 255, 255))
+        text_surf = pygame.font.Font(UI_FONT, 15).render(label, True, "black")
         text_rect = text_surf.get_rect()
         text_rect.midtop = (bg_rect.left + 23, bg_rect.top - 15)
         self.display_surface.blit(text_surf, text_rect)
