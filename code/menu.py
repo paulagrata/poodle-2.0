@@ -25,15 +25,15 @@ class Menu:
         self.index = 0
         self.timer = Timer(200)
 
-    """     
-    def display_money(self):
-        text_surf = self.font.render(f'${self.player.money}', False, 'Black')
-        text_rect = text_surf.get_rect(midbottom = (SCREEN_WIDTH // 2, SCREEN_HEIGHT - 20))
+         
+    def display_options(self):
+        text_surf = self.font.render('Buy press X, Sell press S', False, 'Black')
+        text_rect = text_surf.get_rect(midbottom = (SCREEN_WIDTH // 2, SCREEN_HEIGHT - 100))
 
-        pygame.draw.rect(self.display_surface, 'White', text_rect.inflate(10,10),0,6) # 0,6 rounds it.
+        #pygame.draw.rect(self.display_surface, 'White', text_rect.inflate(10,10),0,6) # 0,6 rounds it.
 
         self.display_surface.blit(text_surf,text_rect) 
-    """
+    
 
     def setup(self):
 
@@ -43,7 +43,7 @@ class Menu:
 
         for index, item in enumerate(self.options):
             if index > self.sell_border:  # if buy item
-                display_name = f"{item} seeds"  # add seeds
+                display_name = f"{item[:-5]} seed"
             else:
                 display_name = item
             
@@ -76,22 +76,34 @@ class Menu:
                 self.index += 1
                 self.timer.activate()
 
-            if keys[pygame.K_SPACE]:
+            # sell
+            if keys[pygame.K_s]:
                 self.timer.activate()
-
-                # get item
                 current_item = self.options[self.index]
-
-                # sell
                 if self.index <= self.sell_border:
                     if self.player.item_inventory[current_item] > 0:
                         self.player.item_inventory[current_item] -= 1
                         self.player.money += SALE_PRICES[current_item]
-                
-                # buy
-                else:
-                    seed_price = PURCHASE_PRICES[current_item]
-                    if self.player.money >= seed_price:
+                else:  # Selling seeds
+                    if self.player.seed_inventory[current_item] > 0:
+                        self.player.seed_inventory[current_item] -= 1
+                        self.player.money += SALE_PRICES[current_item]
+            # buy
+            if keys[pygame.K_x]:
+                self.timer.activate()
+                current_item = self.options[self.index]
+
+                print(self.index)
+                print(self.sell_border)
+
+                if self.index <= self.sell_border:
+                    price = PURCHASE_PRICES[current_item]
+                    if self.player.money >= price:
+                        self.player.item_inventory[current_item] += 1
+                        self.player.money -= PURCHASE_PRICES[current_item]
+                else: 
+                    price = PURCHASE_PRICES[current_item]
+                    if self.player.money >= price:
                         self.player.seed_inventory[current_item] += 1
                         self.player.money -= PURCHASE_PRICES[current_item]
                         
@@ -142,7 +154,7 @@ class Menu:
     
     def update(self):
         self.input()
-        #self.display_money()
+        self.display_options()
         
 
         #pygame.draw.rect(self.display_surface,'pink',self.main_rect)

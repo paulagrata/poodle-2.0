@@ -13,7 +13,7 @@ from random import randint
 from menu import Menu
 from ui import UI
 from stats import StatUpdater
-from pause import Pause
+from pause import Pause, GameManager
 from notification import Notification
 
 
@@ -54,7 +54,7 @@ class Level:
         self.shop_active = False
 
         # pause 
-        self.paused = Pause(self.toggle_pause)
+        self.paused = Pause(self.player, self.clock, self.toggle_pause)
         self.pause_active = False
 
         # notifications
@@ -66,7 +66,6 @@ class Level:
         self.success.set_volume(0.1)
         self.music = pygame.mixer.Sound('audio/sprouting.mp3')
         self.music.play(loops = -1).set_volume(0.2)
-
         
     def setup(self, all_sprites):
         tmx_data = load_pygame('data/map.tmx')
@@ -258,7 +257,6 @@ class Level:
 
         # clock
         self.clock.display()
-
 
         # testing [debug]:
         #print(self.player.item_inventory)      # prints player's inventory

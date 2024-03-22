@@ -12,7 +12,7 @@ class Overlay:
         #imports [key value pairs, not same as tools/seeds used]
         overlay_path = 'graphics/overlay/'
         self.tools_surf = {tool: pygame.image.load(f'{overlay_path}{tool}.png').convert_alpha() for tool in player.tools}
-        self.seeds_surf = {seed: pygame.image.load(f'{overlay_path}{seed}-seed.png').convert_alpha() for seed in player.seeds}
+        self.seeds_surf = {seed: pygame.image.load(f'{overlay_path}{seed}.png').convert_alpha() for seed in player.seeds}
         self.inventory_surf = {inventory: pygame.image.load(f'{overlay_path}{inventory}.png').convert_alpha() for inventory in player.inventorys}
 
         #font
