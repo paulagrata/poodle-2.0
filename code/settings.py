@@ -57,14 +57,20 @@ GROW_SPEED = {
 # [sell]
 SALE_PRICES = {
     'wood': 4,
-    'apple': 2,
+    'apple': 4,
     'corn': 10,
     'tomato': 20,
+    'corn-seed': 1,
+    'tomato-seed': 1,
 }
 # [buy]
 PURCHASE_PRICES = {
-    'corn': 4,
-    'tomato': 5,
+    'wood': 5,
+    'apple': 6,
+    'corn': 20,
+    'tomato': 30,
+    'corn-seed': 4,
+    'tomato-seed': 5,
 }
 
 

@@ -2,6 +2,7 @@ import pygame
 from settings import *
 from timers import Timer
 import json
+import sys
 
 
 class Pause:
@@ -28,7 +29,7 @@ class Pause:
         self.padding = 8
 
         # entries
-        self.options = ['save game','load saved game','new game','settings']
+        self.options = ['new game','load saved game','save game','settings', 'quit']
         self.sell_border = 5
 
         # movement
@@ -77,21 +78,24 @@ class Pause:
                 self.index += 1
                 self.timer.activate()
 
-            if keys[pygame.K_SPACE]:
+            if keys[pygame.K_RETURN]:
                 self.timer.activate()
 
                 selected_option = self.options[self.index]
-                if selected_option == self.options[0]:  # save
-                    print('save game')
-                    GameManager.save_game_state(self.player, self.clock)
+                if selected_option == self.options[0]:  # new
+                    print('new game')
                 elif selected_option == self.options[1]: # load
                     print('load game')
                     game_state = GameManager.load_game("save_file.json")
                     GameManager.import_data(self.player, self.clock, game_state)
-                elif selected_option == self.options[2]: # new
-                    print('new game')
+                elif selected_option == self.options[2]: # save
+                    print('save game')
+                    GameManager.save_game_state(self.player, self.clock)
                 elif selected_option == self.options[3]: # settings
                     print('settings')
+                elif selected_option == self.options[4]: # quit
+                        pygame.quit()
+                        sys.exit()
                         
         # allow scroll to restart
         self.index %= len(self.options)
@@ -130,7 +134,6 @@ class GameManager:
     @staticmethod
     def save_game_state(player, clock, filename="save_file.json"):
 
-        hours, minutes, seconds = clock.calculate_time()
 
         game_state = {
             "player_item_inventory": player.item_inventory,
@@ -140,7 +143,7 @@ class GameManager:
             "player_health": player.health,
             "player_energy": player.energy,
             "player_days": clock.days,
-            "player_time": {'hours':hours, 'minutes':minutes, 'seconds':seconds},
+            "player_time": clock.time_elapsed,
         }
 
         GameManager.save_game(filename, game_state)
@@ -161,6 +164,5 @@ class GameManager:
         player.health = game_state["player_health"]
         player.energy = game_state["player_energy"]
         clock.days = game_state["player_days"]
-        player_time = game_state["player_time"]
-        clock.time(player_time["hours"], player_time["minutes"], player_time["seconds"])
+        clock.time_elapsed = game_state["player_time"]
 
