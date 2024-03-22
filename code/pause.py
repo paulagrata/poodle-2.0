@@ -1,11 +1,15 @@
 import pygame
 from settings import *
 from timers import Timer
+import json
+
 
 class Pause:
-    def __init__(self, toggle_pause):
+    def __init__(self, player, clock, toggle_pause):
         # general setup
         self.display_surface = pygame.display.get_surface()
+        self.player = player
+        self.clock = clock
         self.toggle_pause = toggle_pause
 
         # font
@@ -79,8 +83,11 @@ class Pause:
                 selected_option = self.options[self.index]
                 if selected_option == self.options[0]:  # save
                     print('save game')
+                    GameManager.save_game_state(self.player, self.clock)
                 elif selected_option == self.options[1]: # load
                     print('load game')
+                    game_state = GameManager.load_game("save_file.json")
+                    GameManager.import_data(self.player, self.clock, game_state)
                 elif selected_option == self.options[2]: # new
                     print('new game')
                 elif selected_option == self.options[3]: # settings
@@ -112,3 +119,48 @@ class Pause:
         for text_index, text_surf in enumerate(self.text_surfs):
             top = self.main_rect.top + text_index * (text_surf.get_height() + (self.padding * 2) + self.space)
             self.display(text_surf, top, self.index == text_index)
+
+
+class GameManager:
+    @staticmethod
+    def save_game(filename, game_state):
+        with open(filename, 'w') as file:
+            json.dump(game_state, file)
+
+    @staticmethod
+    def save_game_state(player, clock, filename="save_file.json"):
+
+        hours, minutes, seconds = clock.calculate_time()
+
+        game_state = {
+            "player_item_inventory": player.item_inventory,
+            "player_seed_inventory": player.seed_inventory,
+            "player_posx": player.pos.x,
+            "player_posy": player.pos.y,
+            "player_health": player.health,
+            "player_energy": player.energy,
+            "player_days": clock.days,
+            "player_time": {'hours':hours, 'minutes':minutes, 'seconds':seconds},
+        }
+
+        GameManager.save_game(filename, game_state)
+        print("Game state saved successfully.")
+
+    @staticmethod
+    def load_game(filename):
+        with open(filename, 'r') as file:
+            game_state = json.load(file)
+            return game_state
+    
+    @staticmethod
+    def import_data(player, clock, game_state):
+        player.item_inventory = game_state["player_item_inventory"]
+        player.seed_inventory = game_state["player_seed_inventory"]
+        player.pos.x = game_state["player_posx"]
+        player.pos.y = game_state["player_posy"]
+        player.health = game_state["player_health"]
+        player.energy = game_state["player_energy"]
+        clock.days = game_state["player_days"]
+        player_time = game_state["player_time"]
+        clock.time(player_time["hours"], player_time["minutes"], player_time["seconds"])
+
