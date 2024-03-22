@@ -27,7 +27,7 @@ tutorial version: [[github](https://github.com/paulagrata/poodle/)]
 - **F:** plant seed
 - **Q:** switches tools
 - **E:** switches seeds
-- **G:** switches invetory item [will update]
+- **G:** switches inventory item [will update]
 - **B:** eat!! [will update]
 - **X:** closes notification
 - **SHIFT:** turns you into forest gump
@@ -36,8 +36,13 @@ tutorial version: [[github](https://github.com/paulagrata/poodle/)]
 [shop]
 - **ENTER:** (near merchant) go into shop
 - **arrows:** move up and down
-- **SPACE:** purchase/sell
+- **X:** purchase
+- **S:** sell
 - **ESC:** exit shop
+
+[pause menu]
+- **ENTER:** to execute the options listed
+- **arrows:** move up and down
   
 [cheats]
 - you must figure that out :-)
@@ -68,12 +73,14 @@ tutorial version: [[github](https://github.com/paulagrata/poodle/)]
 - **3.21** updated pause menu UI
 - **3.22** pause menu: save works!
 - **3.22** pause menu: load works!
+- **3.22** updated shop UI + added seperate buy/sell options for all items
 
  ## bugs
 - tree apples on empty trees displaying when day resets
 - hoe should not be able to make a tile on tiles that are already created
 - ~~hoe sounds anytime it is used - needs to be only when tile is placed~~ [fixed!]
 - ~~seeds plant anywhere [not visably] and deduct from inventory~~ [fixed!]
+- remove buy/sell text next to items in shop
 
 ## future updates:
 - UI
@@ -92,6 +99,8 @@ tutorial version: [[github](https://github.com/paulagrata/poodle/)]
 - pause menu
   - ~~pauses game~~ [done!]
   - save game
+    - work on which data is being saved
+    - seperate pause and game manager data
   - load game
   - new game
   - settings
