@@ -34,6 +34,7 @@ class Notification:
             self.toggle_notification(text='')
 
     def display(self):
+        # boop
         pygame.draw.rect(self.display_surface, 'White', self.text_and_subtext_rect.inflate(10, 10), 0, 6)
         self.display_surface.blit(self.text_surf, self.text_rect)
         self.display_surface.blit(self.subtext_surf, self.subtext_rect)
